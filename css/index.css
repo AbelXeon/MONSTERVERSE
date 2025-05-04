@@ -128,6 +128,9 @@
     50% { transform: translate(-5%, -3%); }
     100% { transform: translate(5%, 3%); }
   }
+
+
+  
   
   
   
@@ -977,9 +980,14 @@
     margin-top: 0.5rem;
 }
 
-/* Team Roster */
+
+
+
+
+/* Enhanced Team Roster Section */
 .team-roster {
     margin-bottom: 4rem;
+    position: relative;
 }
 
 .roster-title {
@@ -987,112 +995,429 @@
     color: var(--accent-light);
     font-size: 2.2rem;
     margin-bottom: 2rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.roster-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background: var(--accent-light);
+    box-shadow: 0 0 10px var(--accent-light);
 }
 
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
 }
 
 .dossier-card {
     background-color: rgba(15, 15, 15, 0.3);
     border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
     backdrop-filter: blur(5px);
+    position: relative;
+    border-radius: 5px;
 }
 
 .dossier-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(12, 115, 233, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(12, 115, 233, 0.3);
     border-color: var(--accent-light);
 }
 
 .dossier-image {
     position: relative;
-    height: 250px;
+    height: 280px;
     overflow: hidden;
+}
+
+.dossier-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dossier-card:hover .dossier-image::before {
+    opacity: 1;
 }
 
 .dossier-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .dossier-card:hover .dossier-image img {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .status-badge {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.3rem 0.8rem;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.4rem 1rem;
     font-size: 0.9rem;
     font-weight: bold;
-    border-radius: 3px;
+    border-radius: 20px;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .status-badge.alive {
-    background-color: rgba(0, 255, 0, 0.2);
+    background-color: rgba(0, 255, 0, 0.3);
     color: #00ff00;
     border: 1px solid #00ff00;
 }
 
 .status-badge.deceased {
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: rgba(255, 0, 0, 0.3);
     color: #ff0000;
     border: 1px solid #ff0000;
 }
 
 .dossier-content {
-    padding: 1.5rem;
+    padding: 2rem;
+    position: relative;
 }
 
 .dossier-content h4 {
     color: var(--accent-light);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+    position: relative;
+    display: inline-block;
+}
+
+.dossier-content h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--accent-light);
+    transition: width 0.3s ease;
+}
+
+.dossier-card:hover .dossier-content h4::after {
+    width: 100%;
 }
 
 .dossier-content p {
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     font-size: 1.1rem;
+    line-height: 1.6;
 }
 
 .dossier-content strong {
     color: var(--accent-light);
+    font-weight: normal;
 }
 
 .dossier-toggle {
     background: none;
     border: 1px solid var(--border-color);
     color: var(--text-color);
-    padding: 0.5rem 1rem;
-    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     width: 100%;
     font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.dossier-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(12, 115, 233, 0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
 }
 
 .dossier-toggle:hover {
     background-color: var(--hover-color);
     border-color: var(--accent-light);
+    box-shadow: 0 0 15px rgba(12, 115, 233, 0.3);
 }
 
-/* Iwi Tribe Section */
+.dossier-toggle:hover::before {
+    left: 100%;
+}
+
+/* Profile Reveal Animation */
+.dossier-profile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 15, 0.95);
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dossier-card.active .dossier-profile {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.profile-content {
+    max-height: 100%;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.profile-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.profile-content::-webkit-scrollbar-thumb {
+    background: var(--accent-light);
+    border-radius: 5px;
+}
+
+.close-profile {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-profile:hover {
+    color: var(--accent-light);
+}
+
+/* Monarch Popup Styles */
+.monarch-popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.monarch-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monarch-popup.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+
+.popup-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    background-color: rgba(15, 15, 15, 0.95);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 30px rgba(12, 115, 233, 0.5);
+    z-index: 2;
+    overflow-y: auto;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    padding: 2rem;
+}
+
+.monarch-popup.active .popup-content {
+    transform: scale(1);
+}
+
+.popup-close {
+    position: absolute;
+    top: 0rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 3;
+}
+
+.popup-close:hover {
+    color: var(--accent-light);
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+
+.popup-main-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 20px rgba(12, 115, 233, 0.3);
+}
+
+.popup-title {
+    flex: 1;
+}
+
+.popup-title h3 {
+    color: var(--accent-light);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.popup-body {
+    padding: 1rem 0;
+}
+
+.popup-body p {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.popup-body strong {
+    color: var(--accent-light);
+}
+
+.popup-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.popup-images img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.popup-images img:hover {
+    transform: scale(1.05);
+}
+
+
+
+
+/* Responsive Popup */
+@media (max-width: 768px) {
+    .popup-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .popup-main-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .popup-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+}
+
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dossier-image {
+        height: 220px;
+    }
+    
+    .dossier-content {
+        padding: 1.5rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* Iwi Tribe Section - With Your Exact Requests */
 .iwi-tribe {
     position: relative;
     padding: 4rem 0;
     margin: 4rem 0;
 }
 
+/* Header with original animation */
 .iwi-header {
     text-align: center;
     margin-bottom: 3rem;
@@ -1100,7 +1425,7 @@
 
 .iwi-header h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3.5rem;
+    font-size: 3.5rem; /* Restored original size */
     color: var(--accent-light);
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -1133,11 +1458,12 @@
 }
 
 .iwi-header .section-subtitle {
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* Restored original size */
     color: var(--text-muted);
     margin-top: 1rem;
 }
 
+/* Content Grid */
 .iwi-content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1145,33 +1471,75 @@
     margin-bottom: 3rem;
 }
 
+/* Text Content with adjusted font sizes */
 .iwi-text-content h3 {
     color: var(--accent-light);
     margin-bottom: 1rem;
-    font-size: 1.8rem;
+    font-size: 2rem; /* Slightly larger */
     border-left: 3px solid var(--monarch-orange);
     padding-left: 1rem;
 }
 
+.iwi-text-content p {
+    font-size: 1.4rem; /* Added for better readability */
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Feature List - Images positioned under header paragraph */
 .iwi-features {
     list-style-type: none;
-    margin: 1.5rem 0;
+    margin: 2rem 0 0 0; /* Adjusted to connect with paragraph */
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(12, 115, 233, 0.2);
 }
 
 .iwi-features li {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* Slightly more spacing */
     display: flex;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Slightly larger */
+    padding: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.iwi-features li:hover {
+    background: rgba(30, 30, 30, 0.5);
 }
 
 .iwi-features img {
-    width: 30px;
+    width: 30px; /* Kept original size */
+    height: 30px; /* Added for consistency */
     margin-right: 1rem;
     filter: brightness(0) invert(0.7);
+    transition: all 0.3s ease;
 }
 
-/* Iwi Visuals */
+.iwi-features li:hover img {
+    filter: brightness(0) invert(0.9);
+}
+
+/* Image Container - Positioned under "Who Are The Iwi?" */
+.iwi-image-container {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.iwi-image-container img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 20px rgba(12, 115, 233, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.iwi-image-container img:hover {
+    transform: scale(1.02);
+}
+
+/* Iwi Visuals - Completely unchanged */
 .iwi-visuals {
     position: relative;
 }
@@ -1184,6 +1552,7 @@
     box-shadow: 0 0 20px rgba(12, 115, 233, 0.3);
 }
 
+/* All original carousel styles preserved exactly */
 .carousel-item {
     position: absolute;
     width: 100%;
@@ -1236,6 +1605,11 @@
     display: flex;
     margin: 0 1rem;
 }
+
+
+
+
+
 
 /* Elder Quote Block */
 .quote-block {
@@ -1317,6 +1691,15 @@ cite {
 cite::before {
     content: "— ";
 }
+
+
+
+
+
+
+
+
+
 
 /* Mission Outcome */
 .outcome-summary {
