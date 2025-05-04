@@ -262,12 +262,3 @@ document.addEventListener('DOMContentLoaded', function() {
     animateOnScroll();
 });
 
-
-
-
-
-
-
-
-
-
